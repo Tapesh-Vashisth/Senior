@@ -1,0 +1,72 @@
+.create-modal-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.create-modal-header h4 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 28px;
+}
+
+.create-modal-input-container {
+    margin-bottom: 30px;
+}
+
+.create-modal-input {
+    width: 100%;
+    padding: 10px 8px;
+    outline: none;
+    border: .5px solid grey;
+}
+
+.create-modal-color {
+    display: inline-block;
+}
+
+.create-modal-subheader {
+    margin-bottom: 15px;
+}
+
+.create-modal-subheader-text {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 28px;
+}
+
+.create-modal-subheader-subheader {
+
+}
+
+.create-modal-color label {
+    height: 20px;
+    width: 20px;    
+    display: inline-block;
+    border-radius: 10px;
+    margin-right: 8px
+}
+
+.create-color:checked ~ label {
+    border: 2px solid grey;
+}
+
+.create-modal-button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+
+.create-modal-button {
+    color: white;
+    background-color: red;
+    outline: none;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
