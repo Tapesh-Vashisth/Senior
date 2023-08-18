@@ -1,10 +1,12 @@
 import React from 'react'
+import PageLoader from './loaders/PageLoader';
 import { Routes, Route } from 'react-router-dom'
 import { ToastContainer, toast } from "react-toastify";
-import PageLoader from './loaders/PageLoader';
-import Posts from '../pages/Posts';
-import Bookmarked from '../pages/Bookmarked';
 const Error404 = React.lazy(() => import("./Errors/Error404")) 
+const Posts = React.lazy(() => import("../pages/Posts")) 
+const Bookmarked = React.lazy(() => import("../pages/Bookmarked")) 
+const Home = React.lazy(() => import("../pages/Home")) 
+
 
 
 function Navigation() {
@@ -15,7 +17,7 @@ function Navigation() {
             <Route path='/loader' element = {<PageLoader />} />
 
             <Route path="/">
-                {/* <Route 
+                <Route 
                     path="" 
                     element={
                         <React.Suspense fallback={<PageLoader />}>
@@ -23,8 +25,18 @@ function Navigation() {
                         </React.Suspense>
                     } 
                 />
-                <Route path="/board/:boardId" element={<Posts />} />
-                <Route path="/board/:boardId/Bookmarked" element={<Bookmarked />} /> */}
+
+                <Route path="/board/:boardId" element={
+                    <React.Suspense fallback={<PageLoader />}>
+                        <Posts />
+                    </React.Suspense>
+                } />
+
+                <Route path="/board/:boardId/Bookmarked" element={
+                    <React.Suspense fallback={<Bookmarked />}>
+                        <Bookmarked />
+                    </React.Suspense>
+                } />
             </Route>
 
             <Route
