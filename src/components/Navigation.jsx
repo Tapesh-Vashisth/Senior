@@ -2,7 +2,7 @@ import React from 'react'
 import PageLoader from './loaders/PageLoader';
 import { Routes, Route } from 'react-router-dom'
 import { ToastContainer, toast } from "react-toastify";
-const Error404 = React.lazy(() => import("./Errors/Error404")) 
+const Error404 = React.lazy(() => import("../pages/Error404")) 
 const Posts = React.lazy(() => import("../pages/Posts")) 
 const Bookmarked = React.lazy(() => import("../pages/Bookmarked")) 
 const Home = React.lazy(() => import("../pages/Home")) 
