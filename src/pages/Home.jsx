@@ -1,20 +1,13 @@
 import React from "react";
-import Button from '@mui/material/Button';
-import AddIcon from '@mui/icons-material/Add';
-import Box from '@mui/material/Box';
+import NavBar from "../components/NavBar";
 import '../styles/home.css'
 import CreateModal from "../components/CreateModal";
 
 function Home() {
   return (
-    <div>
-      <div>
-        Hello
-      </div>
-      <div>
-        <CreateModal />
-      </div>
-    </div>
+    <>
+    <NavBar className="navbar" />
+    </>
   );
 }
 
