@@ -2,11 +2,12 @@
     display: grid;
     grid-template-rows: auto;
     grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
-    row-gap: 1.2rem;
+    row-gap: 2rem;
+    /* row-gap: 1.2rem; */
     column-gap: 2rem;
     list-style: none;
     width: 90%;
     align-items: flex-start;
-    margin: auto;
+    margin: 0 auto;
     padding-bottom: 20px;
 }

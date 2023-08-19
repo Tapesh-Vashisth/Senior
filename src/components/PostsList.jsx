@@ -3,7 +3,7 @@ import { Post } from "./Post";
 import "../styles/postlists.css"
 import CreatePostModal from "./CreatePostModal";
 
-function PostsList({ postList, boardIndex }) {
+function PostsList({ postList, boardIndex, colorIndex }) {
   const [postIndex, setPostIndex] = useState(0);
   const [open, setOpen] = useState(false);
 
@@ -25,6 +25,7 @@ function PostsList({ postList, boardIndex }) {
               boardIndex={boardIndex}
               setOpen = {setOpen}
               setPostIndex = {setPostIndex}
+              colorIndex={colorIndex}
             />
           );
         })}
