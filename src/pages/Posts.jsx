@@ -29,10 +29,22 @@ function Posts() {
 
   const onSearch = (title) => {
     if (title === "") {
-      setPostList(boards.boards[boardIndex].posts);
+      setPostList((prev) => {
+        let hold = [];
+        boards.boards[boardIndex].posts.forEach((x, index) => {
+          hold.push({index: index, ...x});
+        });
+        return hold;
+      });
     } else {
       setPostList((prev) => {
-        return boards.boards[boardIndex].posts.filter((x) => x.title.includes(title));
+        let hold = [];
+        boards.boards[boardIndex].posts.forEach((x, index) => {
+          if (x.title.includes(title)) {
+            hold.push({index: index, ...x});
+          }
+        });
+        return hold;
       })
     }
   }
@@ -40,10 +52,15 @@ function Posts() {
   useEffect(() => {
     const posts = boards.boards[boardIndex].posts;
 
-    setPostList(posts);
+    setPostList((prev) => {
+      let hold = [];
+      boards.boards[boardIndex].posts.forEach((x, index) => {
+        hold.push({index: index, ...x});
+      });
+      return hold;
+    });
   }, [boards, boardIndex]);
 
-  console.log("postlist", postList);
 
   const color = colorIndex === 0 || colorIndex === 3 ? "black" : "white";
 
@@ -60,6 +77,7 @@ function Posts() {
         className="navbar"
         type="posts"
         title={boards.boards[boardIndex].title}
+        onSearch={onSearch}
       />
       <div
         className="addPost_Modal"

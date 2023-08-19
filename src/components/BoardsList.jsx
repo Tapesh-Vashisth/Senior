@@ -25,7 +25,7 @@ export const BoardsList = ({boardList}) => {
                     boardName={board.title}
                     boardColor={board.color}
                     boardId={board.id}
-                    index = {index}
+                    index = {board.index}
                     setEditIndex = {setEditIndex}
                     setOpen = {setOpen}
                   />

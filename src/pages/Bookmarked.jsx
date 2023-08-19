@@ -27,17 +27,48 @@ function Bookmarked() {
     }
   }, []);
 
+
+  const onSearch = (title) => {
+    if (title === "") {
+      setPostList((prev) => {
+        let hold = [];
+        boards.boards[boardIndex].posts.forEach((x, index) => {
+          if (x.bookmark) {
+            hold.push({index: index, ...x});
+          }
+        });
+        return hold;
+      });
+    } else {
+      setPostList((prev) => {
+        let hold = [];
+        boards.boards[boardIndex].posts.forEach((x, index) => {
+          if (x.title.includes(title) && x.bookmark) {
+            hold.push({index: index, ...x});
+          }
+        });
+        return hold;
+      })
+    }
+  }
+
+
+
   useEffect(() => {
     const posts = boards.boards[boardIndex].posts;
 
-    const finalPosts = posts.filter((post) => {
-      return post.bookmark === true;
+    setPostList((prev) => {
+      let hold = []
+      posts.forEach((x, index) => {
+        if (x.bookmark) {
+          hold.push({index: index, ...x});
+        }
+      })
+
+      return hold;
     });
-    console.log("finalPosts", finalPosts);
-    setPostList(finalPosts);
   }, [boards, boardIndex]);
 
-  console.log("postlist", postList);
 
   const color = colorIndex === 0 || colorIndex === 3 ? "black" : "white";
 
@@ -54,6 +85,8 @@ function Bookmarked() {
         className="navbar"
         type="posts"
         title={boards.boards[boardIndex].title}
+        onSearch={onSearch}
+        coloredBookmark = {true}
       />
       <div
         className="addPost_Modal"
@@ -64,10 +97,7 @@ function Bookmarked() {
           background: colors[Number(boards.boards[boardIndex].color)],
         }}
       >
-        {postList.length > 0 ? null : (
-          <h2 style={{ marginLeft: "20px", color: `${color}` }}>Your posts</h2>
-        )}
-        <CreatePostModal boardIndex={boardIndex} />
+        <h2 style={{ marginLeft: "20px", color: `${color}` }}>Bookmarked Posts</h2>
       </div>
       <div
         style={{

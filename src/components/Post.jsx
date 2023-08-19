@@ -68,7 +68,6 @@ export const Post = ({
     );
   };
 
-  console.log(colorIndex);
 
   return (
     <div className="post_subcontainer">

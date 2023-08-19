@@ -8,7 +8,7 @@ export const store = configureStore({
     boards: boardReducer
   },
 
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }).concat([reduxLogger])
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false })
 });
 
 

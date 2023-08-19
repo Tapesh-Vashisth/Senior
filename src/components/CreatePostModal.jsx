@@ -52,7 +52,6 @@ function CreatePostModal({mode, boardIndex, postIndex, editOpen, setEditOpen}) {
         e.preventDefault();
 
         if (image === "") {
-            console.log("hmm");
             toast.error("Please Upload an Image", {
                 position: "top-right"
             })
@@ -83,7 +82,7 @@ function CreatePostModal({mode, boardIndex, postIndex, editOpen, setEditOpen}) {
     }, [editOpen])
 
     const handleImage = async (e) => {
-        if (e.target.files) {
+        if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
             if (file.type === "image/jpeg" || file.type === "image/png" || file.type === "image/jpg") {
                 let base64 = await convertToBase64(file);
@@ -117,7 +116,7 @@ function CreatePostModal({mode, boardIndex, postIndex, editOpen, setEditOpen}) {
                     <form onSubmit={handleCreatePost}>
                         <div className='create-post-modal-header'>
                             <div>
-                                <h4>Create a post</h4>
+                                <h4>{mode === "edit" ? "Edit": "Create a"} post</h4>
                                 <p>Write something for your post</p>
                             </div>
                             <CloseIcon onClick = {() => {handleClose(); setEditOpen && setEditOpen(false)}} sx = {{cursor: "pointer"}} />
@@ -152,7 +151,7 @@ function CreatePostModal({mode, boardIndex, postIndex, editOpen, setEditOpen}) {
                         </div>
 
                         <div className="create-post-modal-button-container">
-                            <button className='create-post-modal-button' type='submit'>Create Post</button>
+                            <button className='create-post-modal-button' type='submit'>{mode === "edit" ? "Edit": "Create"} Post</button>
                         </div>
                     </form>
                 </Box>

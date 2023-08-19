@@ -10,16 +10,37 @@ function Home() {
 
   const onSearch = (title) => {
     if (title === "") {
-      setBoardList(boards.boards);
+      setBoardList((prev) => {
+        let hold = [];
+        boards.boards.forEach((x, index) => {
+            hold.push({index: index, ...x});
+        });
+  
+        return hold;
+      })
     } else {
       setBoardList((prev) => {
-        return boards.boards.filter((x) => x.title.includes(title));
+        let hold = [];
+        boards.boards.forEach((x, index) => {
+          if (x.title.includes(title)) {
+            hold.push({index: index, ...x});
+          }
+        });
+
+        return hold;
       })
     }
   }
 
   useEffect(() => {
-    setBoardList(boards.boards);
+    setBoardList((prev) => {
+      let hold = [];
+      boards.boards.forEach((x, index) => {
+          hold.push({index: index, ...x});
+      });
+
+      return hold;
+    })
   }, [boards.boards]);
   
   return (

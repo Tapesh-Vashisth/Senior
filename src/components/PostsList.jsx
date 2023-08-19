@@ -20,7 +20,7 @@ function PostsList({ postList, boardIndex, colorIndex }) {
               id={post.id}
               likes={post.likes}
               image={post.image}
-              index={index}
+              index={post.index}
               date={post.created}
               boardIndex={boardIndex}
               setOpen = {setOpen}

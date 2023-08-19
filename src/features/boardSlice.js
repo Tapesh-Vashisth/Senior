@@ -42,7 +42,7 @@ const boardSlice = createSlice({
             localStorage.setItem("Boards", JSON.stringify(state.boards));
         },
         likePost: (state, action) => {
-            state.boards[action.payload.boardIndex].posts[action.payload.postIndex].likes += 1;
+            state.boards[action.payload.boardIndex].posts[action.payload.postIndex].likes = (Number(state.boards[action.payload.boardIndex].posts[action.payload.postIndex].likes) === 1 ? 0 : 1);
             localStorage.setItem("Boards", JSON.stringify(state.boards));
         },
         bookmark: (state, action) => {
