@@ -23,10 +23,10 @@ function Home() {
   }, [boards.boards]);
   
   return (
-    <>
+    <div style = {{display: "flex", flexGrow: 1, flexDirection: "column", height: "100vh"}}>
       <NavBar className="navbar" type = "board" onSearch = {onSearch} />
       <BoardsList boardList={boardList} />
-    </>
+    </div>
   );
 }
 

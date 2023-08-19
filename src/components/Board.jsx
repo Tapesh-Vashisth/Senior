@@ -7,18 +7,31 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { useDispatch } from "react-redux";
+import { boardActions } from "../features/boardSlice";
 
 const options = ["Edit", "Delete"];
 
 function Board(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  const dispatch = useDispatch();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleDelete = () => {
+    dispatch(boardActions.deleteBoard(props.index));
+    handleClose();
+  }
+  
+  const handleEdit = () => {
+    
+    handleClose();
+  }
 
   return (
     <div className="board_box">
@@ -57,7 +70,7 @@ function Board(props) {
             <MenuItem
               key={option}
               selected={option === "Pyxis"}
-              onClick={handleClose}
+              onClick={option === "Edit" ? handleEdit: handleDelete}
             >
               {option === "Edit" ? (
                 <>

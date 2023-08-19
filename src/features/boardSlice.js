@@ -20,8 +20,9 @@ const boardSlice = createSlice({
             state.boards[action.payload.index] = action.payload.update
             localStorage.setItem("Boards", JSON.stringify(state.boards));
         },
-        deleteBoards: (state, action) => {
+        deleteBoard: (state, action) => {
             state.boards.splice(action.payload, 1);
+            localStorage.setItem("Boards", JSON.stringify(state.boards));
         }
     }
 })
