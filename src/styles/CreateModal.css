@@ -21,6 +21,7 @@
     padding: 10px 8px;
     outline: none;
     border: .5px solid grey;
+    border-radius: 4px;
 }
 
 .create-modal-color {

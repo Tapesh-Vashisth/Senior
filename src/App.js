@@ -3,6 +3,7 @@ import PageLoader from "./components/loaders/PageLoader";
 import Navigation from "./components/Navigation";
 import { useDispatch } from "react-redux";
 import { boardActions } from "./features/boardSlice";
+import { toast } from "react-toastify";
 
 function App() {
   const [screenLoad, setScreenLoad] = useState(true);

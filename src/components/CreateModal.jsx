@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -6,7 +6,7 @@ import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
 import "../styles/CreateModal.css";
 import colors from '../data/colors';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { boardActions } from '../features/boardSlice';
 import {v4 as uuidv4} from 'uuid';
 
@@ -23,16 +23,20 @@ const style = {
     boxShadow: 24,
     px: 3,
     py: 4,
-    borderRadius: "10px"
+    borderRadius: "10px",
+    width: "100%",
+    maxHeight: "100vh",
+    overflow: "scroll"
 };
 
-function CreateModal() {
+function CreateModal({mode, index}) {
     const [open, setOpen] = React.useState(false);
     const [title, setTitle] = React.useState("");
     const [color, setColor] = React.useState(0);
     const dispatch = useDispatch();
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+    const boards = useSelector((state) => state.boards);
 
     const handleCreateBoard = (e) => {
         e.preventDefault();
@@ -43,7 +47,12 @@ function CreateModal() {
         handleClose();
     }
 
-    
+    useEffect(() => {
+        if (mode === "edit") {
+            setTitle(boards.boards[index].title);
+            setColor(Number(boards.boards[index].color));
+        }
+    }, [])
 
     return (
         <>

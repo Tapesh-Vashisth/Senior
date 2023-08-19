@@ -9,7 +9,9 @@ import colors from '../data/colors';
 import { useDispatch } from 'react-redux';
 import { boardActions } from '../features/boardSlice';
 import {v4 as uuidv4} from 'uuid';
-
+import InsertPhotoOutlinedIcon from '@mui/icons-material/InsertPhotoOutlined';
+import { toast } from 'react-toastify';
+import convertToBase64 from '../helper/convertToBase64';
 
 
 const style = {
@@ -23,24 +25,44 @@ const style = {
     boxShadow: 24,
     px: 3,
     py: 4,
-    borderRadius: "10px"
+    borderRadius: "10px",
+    width: "100%",
+    maxHeight: "100vh",
+    overflow: "scroll"
 };
 
 function CreatePostModal() {
     const [open, setOpen] = React.useState(false);
     const [title, setTitle] = React.useState("");
-    const [color, setColor] = React.useState(0);
+    const [image, setImage] = React.useState("");
+    const [description, setDescription] = React.useState("");
     const dispatch = useDispatch();
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleClose = () => {
+        setImage("");
+        setOpen(false)
+    };
 
-    const handleCreateBoard = (e) => {
+
+    const handleCreatePost = (e) => {
         e.preventDefault();
+        console.log(title, description, image)
+
         
-        dispatch(boardActions.addBoard({ id: uuidv4(), title: title, color: color}));
-        setTitle("")
-        setOpen(0)
-        handleClose();
+    }
+
+    const handleImage = async (e) => {
+        if (e.target.files) {
+            const file = e.target.files[0];
+            if (file.type === "image/jpeg" || file.type === "image/png" || file.type === "image/jpg") {
+                let base64 = await convertToBase64(file);
+                setImage(base64);
+            } else {
+                toast.error("Allowed formats are - jpeg, png & jpg", {
+                    position: "top-right"
+                })
+            }
+        }
     }
 
     return (
@@ -54,7 +76,7 @@ function CreatePostModal() {
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>
-                    <form onSubmit={handleCreateBoard}>
+                    <form onSubmit={handleCreatePost}>
                         <div className='create-post-modal-header'>
                             <div>
                                 <h4>Create a post</h4>
@@ -68,22 +90,27 @@ function CreatePostModal() {
                             <input className='create-post-modal-input' type="text" name='title' placeholder='Enter Post Title' value={title} required onChange={(e) => setTitle(e.target.value)} />
                         </div>
 
-                        <div className='create-post-modal-subheader'>
-                            <h4 className='create-post-modal-subheader-text'>Select post colour</h4>
-                            <p className='create-post-modal-subheader-subheader'>Here are some templates to help you get started</p>
+                        <div>
+                            {
+                                image !== ""
+                                ?
+                                <label htmlFor="image" className='create-post-image-container'>
+                                    <img src={image} className='create-post-image' alt="img" />
+                                </label>
+                                :
+                                <label htmlFor='image' className='create-post-add-image'>
+                                    <InsertPhotoOutlinedIcon style = {{color: "grey", width: "15px", marginRight: "6px"}} />
+                                    <p>Add your image</p>
+                                </label>
+                            }
+                            <input type="file" name="image" id="image" hidden multiple={false} onChange={handleImage} />
                         </div>
 
-                        <div className='create-post-modal-color-container'>
-                            {
-                                colors.map((color, index) => {
-                                    return (
-                                        <div className='create-post-modal-color' key={index}>
-                                            <input type="radio" name="create-color" className='create-post-color' onChange={(e) => setColor(e.target.value)} value={index} id={index} hidden defaultChecked = {index === 0 ? true: false} />
-                                            <label htmlFor={index} style = {{background: color}}></label>
-                                        </div>
-                                    )
-                                })
-                            }
+                        <hr className='create-post-modal-separator' />
+
+                        <div className='create-post-modal-input-container'>
+                            <label>What's on your mind?</label>
+                            <textarea placeholder='type here' rows={3} required value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
                         </div>
 
                         <div className="create-post-modal-button-container">

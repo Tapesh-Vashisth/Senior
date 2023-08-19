@@ -13,10 +13,50 @@
 }
 
 .create-post-modal-input-container {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     row-gap: 7px;
+}
+
+.create-post-modal-input-container label {
+    font-weight: 600;
+}
+
+.create-post-image-container {
+    height: 200px;
+}
+
+.create-post-image {
+    height: inherit;
+    width: 100%;
+    object-fit: cover;
+}
+
+.create-post-add-image {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: .5px solid grey;
+    width: fit-content;
+    padding: 1px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.create-post-add-image p {
+    color: grey;
+    font-size: 12px;
+}
+
+.create-post-modal-input-container textarea {
+    max-width: 100%;
+    min-width: 100%;
+    padding: 10px 8px;
+    outline: none;
+    border: .5px solid grey;
+    max-height: 20vh;
+    border-radius: 4px;
 }
 
 .create-post-modal-input {
@@ -24,6 +64,7 @@
     padding: 10px 8px;
     outline: none;
     border: .5px solid grey;
+    border-radius: 4px;
 }
 
 .create-post-modal-color {
@@ -42,6 +83,13 @@
 
 .create-post-modal-subheader-subheader {
 
+}
+
+.create-post-modal-separator {
+    margin: 30px 0px;
+    height: .5px;
+    border: none;
+    border-top: .5px solid rgb(216, 214, 214);
 }
 
 .create-post-modal-color label {
