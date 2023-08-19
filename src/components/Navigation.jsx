@@ -37,6 +37,7 @@ function Navigation() {
                 <Route path="/board/:boardId/Bookmarked" element={
                     <React.Suspense fallback={<PageLoader />}>
                         <Bookmarked />
+                        {/* <Posts mode="bookmarked" /> */}
                     </React.Suspense>
                 } />
             </Route>

@@ -5,8 +5,11 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import { useNavigate } from "react-router-dom";
+import { useParams } from 'react-router-dom'
+
 
 function NavBar({ type, onSearch, title }) {
+  const boardId = useParams().boardId;
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [searchIcon, setSearchIcon] = useState(false);
@@ -38,6 +41,10 @@ function NavBar({ type, onSearch, title }) {
 
   const handleNavigation = () => {
     navigate(-1);
+  }
+
+  const bookmarkNavigation = () => {
+    navigate("/board/" + boardId + "/Bookmarked");
   }
 
   return (
@@ -100,7 +107,7 @@ function NavBar({ type, onSearch, title }) {
 
         <div className="modal_div">
           {type === "posts" ? (
-            <BookmarkBorderIcon />
+            <BookmarkBorderIcon onClick={bookmarkNavigation} sx={{ cursor: 'pointer'}}/>
           ) : (
             <CreateModal setSearch={setSearch} type = "create" />
           )}
