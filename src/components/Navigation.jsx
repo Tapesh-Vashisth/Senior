@@ -26,14 +26,16 @@ function Navigation() {
                     } 
                 />
 
-                <Route path="/board/:boardId" element={
+                <Route 
+                    path="/board/:boardId"
+                    element={
                     <React.Suspense fallback={<PageLoader />}>
                         <Posts />
                     </React.Suspense>
                 } />
 
                 <Route path="/board/:boardId/Bookmarked" element={
-                    <React.Suspense fallback={<Bookmarked />}>
+                    <React.Suspense fallback={<PageLoader />}>
                         <Bookmarked />
                     </React.Suspense>
                 } />

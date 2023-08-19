@@ -28,7 +28,7 @@ const style = {
   overflow: "scroll",
 };
 
-function CreateModal({ mode, editIndex, hanldleOpenOutside, openModal, setOpenModal }) {
+function CreateModal({ mode, editIndex, hanldleOpenOutside, openModal, setOpenModal, type }) {
   const [open, setOpen] = React.useState(false);
   const [title, setTitle] = React.useState("");
   const [color, setColor] = React.useState(0);
@@ -39,7 +39,6 @@ function CreateModal({ mode, editIndex, hanldleOpenOutside, openModal, setOpenMo
 
   const handleCreateBoard = (e) => {
     e.preventDefault(); 
-
     if (mode === "edit") {
       dispatch(
         boardActions.editBoard({index: editIndex, title: title, color: color})
@@ -127,11 +126,12 @@ function CreateModal({ mode, editIndex, hanldleOpenOutside, openModal, setOpenMo
               })}
             </div>
 
-            <div className="create-modal-button-container">
+            {/* <div className="create-modal-button-container">
               <button className="create-modal-button" type="submit">
                 {mode === "edit" ? "Edit" : "Create"} board
               </button>
-            </div>
+            </div> */}
+            {/* <CreateButton  */}
           </form>
         </Box>
       </Modal>

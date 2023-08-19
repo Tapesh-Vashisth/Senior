@@ -6,6 +6,7 @@ import PageLoader from './components/loaders/PageLoader';
 import store from './app/store';
 import { Provider } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
+import "./styles/index.css";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

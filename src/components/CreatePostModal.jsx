@@ -12,6 +12,7 @@ import {v4 as uuidv4} from 'uuid';
 import InsertPhotoOutlinedIcon from '@mui/icons-material/InsertPhotoOutlined';
 import { toast } from 'react-toastify';
 import convertToBase64 from '../helper/convertToBase64';
+import CreateButton from './CreateButton';
 
 
 
@@ -70,7 +71,8 @@ function CreatePostModal(boardIndex) {
 
     return (
         <>
-            <Button onClick={handleOpen}>Open modal 2</Button>
+            {/* <Button onClick={handleOpen}>+ Create New Post</Button> */}
+            <CreateButton modal={handleOpen} name="Create New Post" icon="+" />
             <Modal
                 open={open}
                 onClose={handleClose}
