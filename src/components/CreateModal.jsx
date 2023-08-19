@@ -132,7 +132,6 @@ function CreateModal({ mode, editIndex, hanldleOpenOutside, openModal, setOpenMo
                 {mode === "edit" ? "Edit" : "Create"} board
               </button>
             </div>
-            {/* <CreateButton  */}
           </form>
         </Box>
       </Modal>

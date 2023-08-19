@@ -14,12 +14,14 @@ function Posts() {
   const [postList, setPostList] = useState([]);
   const boardId = useParams().boardId;
   const [boardIndex, setBoardIndex] = useState(0);
+  const [colorIndex, setColorIndex] = useState(Number(0));
   const boards = useSelector((state) => state.boards);
 
   useEffect(() => {
     for (let i = 0; i < boards.boards.length; i++) {
       if (boards.boards[i].id === boardId) {
         setBoardIndex(i);
+        setColorIndex(Number(boards.boards[i].color))
         break;
       }
     }
@@ -30,6 +32,9 @@ function Posts() {
     setPostList(boards.boards[boardIndex].posts);
   }, [boards, boardIndex])
 
+  const color = (colorIndex === 0 || colorIndex === 3 ? "black" : "white");
+
+
   return (
     <div style = {{display: "flex", flexGrow: 1, flexDirection: "column", height: "100vh"}}>
       <NavBar className="navbar" type="posts" title = {boards.boards[boardIndex].title} />
@@ -39,7 +44,7 @@ function Posts() {
           ?
           null
           :
-          <h2 style = {{marginLeft: "20px"}}>Your posts</h2>
+          <h2 style = {{marginLeft: "20px", color: `${color}`}}>Your posts</h2>
         }
         <CreatePostModal boardIndex={boardIndex} />
       </div>
@@ -48,9 +53,9 @@ function Posts() {
         
           postList.length > 0
           ?
-          <PostsList postList={postList} boardIndex = {boardIndex} />
+          <PostsList postList={postList} boardIndex = {boardIndex} colorIndex={colorIndex}/>
           :
-          <NotFound type="post" />
+          <NotFound type="post" colorIndex={colorIndex} />
         }
       </div>
     </div>

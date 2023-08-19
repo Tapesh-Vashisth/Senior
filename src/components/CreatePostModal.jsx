@@ -129,7 +129,7 @@ function CreatePostModal({mode, boardIndex}) {
                         </div>
 
                         <div className="create-post-modal-button-container">
-                            <button className='create-post-modal-button' type='submit'>Create board</button>
+                            <button className='create-post-modal-button' type='submit'>Create Post</button>
                         </div>
                     </form>
                 </Box>
