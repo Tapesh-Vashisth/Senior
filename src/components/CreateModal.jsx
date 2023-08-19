@@ -30,7 +30,7 @@ const style = {
     overflow: "scroll"
 };
 
-function CreateModal({mode, index}) {
+function CreateModal({mode, index, setSearch}) {
     const [open, setOpen] = React.useState(false);
     const [title, setTitle] = React.useState("");
     const [color, setColor] = React.useState(0);
@@ -41,11 +41,11 @@ function CreateModal({mode, index}) {
 
     const handleCreateBoard = (e) => {
         e.preventDefault();
-        
-        dispatch(boardActions.addBoard({ id: uuidv4(), title: title, color: color}));
+        dispatch(boardActions.addBoard({ id: uuidv4(), title: title, color: color }));
         setTitle("")
         setOpen(0)
         handleClose();
+        setSearch("");
     }
 
     useEffect(() => {
@@ -63,7 +63,7 @@ function CreateModal({mode, index}) {
                 open={open}
                 onClose={handleClose}
                 BackdropProps={{style: {backgroundColor: "rgba(0, 0, 0, 0.8)"}}}
-                aria-labelledby="modal-modal-title"
+                aria-labelledby="modal-modal-ti tle"
                 aria-describedby="modal-modal-description"
             >
                 <Box sx={style}>

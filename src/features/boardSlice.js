@@ -15,6 +15,13 @@ const boardSlice = createSlice({
         addBoard: (state, action) => {
             state.boards.push(action.payload)
             localStorage.setItem("Boards", JSON.stringify(state.boards));
+        },
+        editBoard: (state, action) => {
+            state.boards[action.payload.index] = action.payload.update
+            localStorage.setItem("Boards", JSON.stringify(state.boards));
+        },
+        deleteBoards: (state, action) => {
+            state.boards.splice(action.payload, 1);
         }
     }
 })
