@@ -15,6 +15,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import moment, { Moment } from "moment";
 
 const options = ["Edit", "Delete"];
 
@@ -155,7 +156,7 @@ export const Post = ({
             color: "grey",
           }}
         >
-          {date.toString()}
+          {moment(date).format("Do MMMM")}
         </div>
         <div className="details_image">
           <img

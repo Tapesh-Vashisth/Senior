@@ -1,7 +1,7 @@
 import React from 'react'
 
 function NotFound({type, colorIndex}) {
-    const color = (colorIndex === 0 || colorIndex === 3 ? "black" : "white");
+    const color = (type === "board" ? "black" : (colorIndex === 0 || colorIndex === 3 ? "black" : "white"));
     
     return (
         <div style = {{display:"flex", flexGrow: 1, justifyContent: "center", alignItems: "center", flexDirection: "column", textAlign: "center"}}>
