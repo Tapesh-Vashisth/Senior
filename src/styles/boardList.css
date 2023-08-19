@@ -1,0 +1,17 @@
+.boards_div {
+    width: 90%;
+    margin: auto;
+    margin-top: 1.8rem;
+}
+
+.boards_div h2 {
+    margin-bottom: 1.5rem;
+}
+
+.board_list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    row-gap: 1.2rem;
+    column-gap: 2rem;
+    list-style: none;
+}

@@ -1,6 +1,7 @@
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import "../styles/navigation.css";
+import CreateModal from "./CreateModal";
 
 function NavBar() {
     console.log(window.screen.availWidth);
@@ -17,14 +18,10 @@ function NavBar() {
 
           <input type="text" name="search" placeholder="Search" />
         </div>
-        <Button
-          variant="outlined"
-          startIcon={<DeleteIcon />}
-          sx={{ paddingLeft: 4, paddingRight: 4 }}
-          className="create_button"
-        >
-          Delete
-        </Button>
+        <div className="modal_div">
+
+        <CreateModal /> 
+        </div>
       </div>
     </div>
   );

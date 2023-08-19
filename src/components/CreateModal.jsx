@@ -9,6 +9,7 @@ import colors from '../data/colors';
 import { useDispatch, useSelector } from 'react-redux';
 import { boardActions } from '../features/boardSlice';
 import {v4 as uuidv4} from 'uuid';
+import CreateButton from './CreateButton';
 
 
 
@@ -56,7 +57,8 @@ function CreateModal({mode, index}) {
 
     return (
         <>
-            <Button onClick={handleOpen}>Open modal</Button>
+            {/* <Button onClick={handleOpen} className=''>Open modal</Button> */}
+            <CreateButton modal={handleOpen} name="Create New Board" icon="+" />
             <Modal
                 open={open}
                 onClose={handleClose}

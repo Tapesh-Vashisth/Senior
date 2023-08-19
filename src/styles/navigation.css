@@ -4,15 +4,14 @@
     padding: 10px;
     align-items: center;
     height: 7vh;
-    padding-left: 4vw;
-    padding-right: 2vw;
+    padding: 2rem 2rem;
     border-bottom: 2px solid #f8f8f8;
 }
 
 .navigation_right {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     gap: 2vw;
 }
 
