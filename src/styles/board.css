@@ -1,18 +1,21 @@
 .board_box {
     display: grid;
-    grid-template-columns: 2fr 4fr 1fr;
+    grid-template-columns: 5fr 1fr;
     column-gap: 10px;
     border: 2px solid rgba(0, 0, 0, 0.1);
     border-radius: 5px;
+    cursor: pointer;
 }
 
-/* .board_box .color_div {
-    background-color: red;
-} */
+.board_left {
+    display: grid;
+    grid-template-columns: 1.5fr 4fr;
+}
 
 .board_box .name_div {
     padding: 1.3rem;
     font-size: 1.4rem;
+    align-self: center ;
 }
 
 .board_box .colon_div {

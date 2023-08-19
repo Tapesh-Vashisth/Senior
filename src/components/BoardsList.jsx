@@ -16,11 +16,15 @@ export const BoardsList = ({boardList}) => {
         {
           boardList.length > 0 
           ?
-          <ul className="board_list">
+          <div className="board_list">
             {boardList.map((board, index) => {
               return (
-                <li key={board.id}>
+                // <div 
+                //   key={board.id}
+                //   style = {{cursor: "pointer", alignSelf: "stretch"}}
+                // >
                   <Board
+                    key = {board.id}
                     boardName={board.title}
                     boardColor={board.color}
                     boardId={board.id}
@@ -28,10 +32,10 @@ export const BoardsList = ({boardList}) => {
                     setEditIndex = {setEditIndex}
                     setOpen = {setOpen}
                   />
-                </li>
+                // </div>
               );
             })}
-          </ul>
+          </div>
           :
           <NotFound />
         }
