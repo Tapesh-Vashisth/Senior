@@ -12,7 +12,7 @@ function NavBar() {
       <div className="navigation_right">
         <div className="navigation_searchBar">
           <label htmlFor="search">
-            <span class="material-icons-outlined">search</span>
+            <span className="material-icons-outlined">search</span>
           </label>
 
           <input type="text" name="search" placeholder="Search" />

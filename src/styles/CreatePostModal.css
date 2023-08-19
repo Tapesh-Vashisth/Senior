@@ -1,47 +1,50 @@
-.create-modal-header {
+.create-post-modal-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 20px;
 }
 
-.create-modal-header h4 {
+.create-post-modal-header h4 {
     font-size: 20px;
     font-weight: 700;
     line-height: 28px;
 }
 
-.create-modal-input-container {
+.create-post-modal-input-container {
     margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 7px;
 }
 
-.create-modal-input {
+.create-post-modal-input {
     width: 100%;
     padding: 10px 8px;
     outline: none;
     border: .5px solid grey;
 }
 
-.create-modal-color {
+.create-post-modal-color {
     display: inline-block;
 }
 
-.create-modal-subheader {
+.create-post-modal-subheader {
     margin-bottom: 15px;
 }
 
-.create-modal-subheader-text {
+.create-post-modal-subheader-text {
     font-size: 20px;
     font-weight: 700;
     line-height: 28px;
 }
 
-.create-modal-subheader-subheader {
+.create-post-modal-subheader-subheader {
 
 }
 
-.create-modal-color label {
+.create-post-modal-color label {
     height: 20px;
     width: 20px;    
     display: inline-block;
@@ -50,18 +53,18 @@
     cursor: pointer;
 }
 
-.create-color:checked ~ label {
+.create-post-color:checked ~ label {
     border: 2px solid grey;
 }
 
-.create-modal-button-container {
+.create-post-modal-button-container {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     margin-top: 30px;
 }
 
-.create-modal-button {
+.create-post-modal-button {
     color: white;
     background-color: red;
     outline: none;

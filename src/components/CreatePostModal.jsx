@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
-import "../styles/CreateModal.css";
+import "../styles/CreatePostModal.css";
 import colors from '../data/colors';
 import { useDispatch } from 'react-redux';
 import { boardActions } from '../features/boardSlice';
@@ -26,7 +26,7 @@ const style = {
     borderRadius: "10px"
 };
 
-function CreateModal() {
+function CreatePostModal() {
     const [open, setOpen] = React.useState(false);
     const [title, setTitle] = React.useState("");
     const [color, setColor] = React.useState(0);
@@ -43,11 +43,9 @@ function CreateModal() {
         handleClose();
     }
 
-    
-
     return (
         <>
-            <Button onClick={handleOpen}>Open modal</Button>
+            <Button onClick={handleOpen}>Open modal 2</Button>
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -57,26 +55,30 @@ function CreateModal() {
             >
                 <Box sx={style}>
                     <form onSubmit={handleCreateBoard}>
-                        <div className='create-modal-header'>
-                            <h4>Add a name for your board</h4>
+                        <div className='create-post-modal-header'>
+                            <div>
+                                <h4>Create a post</h4>
+                                <p>Write something for your post</p>
+                            </div>
                             <CloseIcon onClick = {handleClose} sx = {{cursor: "pointer"}} />
                         </div>
 
-                        <div className='create-modal-input-container'>
-                            <input className='create-modal-input' type="text" name='title' placeholder='Enter Board Name' value={title} required onChange={(e) => setTitle(e.target.value)} />
+                        <div className='create-post-modal-input-container'>
+                            <label>Subject</label>
+                            <input className='create-post-modal-input' type="text" name='title' placeholder='Enter Post Title' value={title} required onChange={(e) => setTitle(e.target.value)} />
                         </div>
 
-                        <div className='create-modal-subheader'>
-                            <h4 className='create-modal-subheader-text'>Select post colour</h4>
-                            <p className='create-modal-subheader-subheader'>Here are some templates to help you get started</p>
+                        <div className='create-post-modal-subheader'>
+                            <h4 className='create-post-modal-subheader-text'>Select post colour</h4>
+                            <p className='create-post-modal-subheader-subheader'>Here are some templates to help you get started</p>
                         </div>
 
-                        <div className='create-modal-color-container'>
+                        <div className='create-post-modal-color-container'>
                             {
                                 colors.map((color, index) => {
                                     return (
-                                        <div className='create-modal-color' key={index}>
-                                            <input type="radio" name="create-color" className='create-color' onChange={(e) => setColor(e.target.value)} value={index} id={index} hidden defaultChecked = {index === 0 ? true: false} />
+                                        <div className='create-post-modal-color' key={index}>
+                                            <input type="radio" name="create-color" className='create-post-color' onChange={(e) => setColor(e.target.value)} value={index} id={index} hidden defaultChecked = {index === 0 ? true: false} />
                                             <label htmlFor={index} style = {{background: color}}></label>
                                         </div>
                                     )
@@ -84,8 +86,8 @@ function CreateModal() {
                             }
                         </div>
 
-                        <div className="create-modal-button-container">
-                            <button className='create-modal-button' type='submit'>Create board</button>
+                        <div className="create-post-modal-button-container">
+                            <button className='create-post-modal-button' type='submit'>Create board</button>
                         </div>
                     </form>
                 </Box>
@@ -94,4 +96,4 @@ function CreateModal() {
     )
 }
 
-export default CreateModal
+export default CreatePostModal
