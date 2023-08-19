@@ -10,6 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { useDispatch } from "react-redux";
 import { boardActions } from "../features/boardSlice";
 import { useNavigate } from "react-router-dom";
+import CreateModal from "./CreateModal";
 
 const options = ["Edit", "Delete"];
 
@@ -31,8 +32,9 @@ function Board(props) {
   }
   
   const handleEdit = () => {
-    
     handleClose();
+    props.setEditIndex(props.index);
+    props.setOpen(true);
   }
 
 

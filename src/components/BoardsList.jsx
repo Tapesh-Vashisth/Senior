@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Board from "./Board";
 import { useSelector } from "react-redux";
 import colors from "../data/colors";
 import "../styles/boardList.css";
 import NotFound from "./NotFound";
-import { useNavigate } from "react-router-dom";
+import CreateModal from "./CreateModal";
 
 export const BoardsList = ({boardList}) => {
+  const [open, setOpen] = useState(false);
+  const [editIndex, setEditIndex] = useState(0);
 
   return (
     <div className="boards_div">
@@ -14,26 +16,31 @@ export const BoardsList = ({boardList}) => {
         {
           boardList.length > 0 
           ?
-          <ul className="board_list">
+          <div className="board_list">
             {boardList.map((board, index) => {
               return (
-                <li 
-                  key={board.id}
-                  style = {{cursor: "pointer"}}
-                >
+                // <div 
+                //   key={board.id}
+                //   style = {{cursor: "pointer", alignSelf: "stretch"}}
+                // >
                   <Board
+                    key = {board.id}
                     boardName={board.title}
                     boardColor={board.color}
                     boardId={board.id}
                     index = {index}
+                    setEditIndex = {setEditIndex}
+                    setOpen = {setOpen}
                   />
-                </li>
+                // </div>
               );
             })}
-          </ul>
+          </div>
           :
           <NotFound />
         }
+
+        <CreateModal openModal = {open} mode="edit" editIndex={editIndex} setOpenModal={setOpen} />
     </div>
   );
 };

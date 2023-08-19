@@ -28,7 +28,7 @@ const style = {
   overflow: "scroll",
 };
 
-function CreateModal({ mode, index }) {
+function CreateModal({ mode, editIndex, hanldleOpenOutside, openModal, setOpenModal }) {
   const [open, setOpen] = React.useState(false);
   const [title, setTitle] = React.useState("");
   const [color, setColor] = React.useState(0);
@@ -38,27 +38,37 @@ function CreateModal({ mode, index }) {
   const boards = useSelector((state) => state.boards);
 
   const handleCreateBoard = (e) => {
-    e.preventDefault();
+    e.preventDefault(); 
 
-    dispatch(
-      boardActions.addBoard({ id: uuidv4(), title: title, color: color })
-    );
+    if (mode === "edit") {
+      dispatch(
+        boardActions.editBoard({index: editIndex, title: title, color: color})
+      );
+    } else {
+      dispatch(
+        boardActions.addBoard({ id: uuidv4(), title: title, color: color })
+      );
+    }
     setTitle("");
     setOpen(0);
     handleClose();
+    setOpenModal(false);
   };
 
   useEffect(() => {
+    setOpen(!!openModal);
     if (mode === "edit") {
-      setTitle(boards.boards[index].title);
-      setColor(Number(boards.boards[index].color));
+      setTitle(boards.boards[editIndex].title);
+      setColor(Number(boards.boards[editIndex].color));
     }
-  }, []);
+  }, [openModal]);
+
+  
 
   return (
     <>
-      {window.screen.availWidth > 650 && <CreateButton modal={handleOpen} name="Create New Board" icon="+" />}
-      {window.screen.availWidth <= 650 && <CreateButton modal={handleOpen} name="" icon="+" />}
+      {mode !== "edit" && window.screen.availWidth > 650 && <CreateButton modal={handleOpen} name="Create New Board" icon="+" />}
+      {mode !== "edit" && window.screen.availWidth <= 650 && <CreateButton modal={handleOpen} name="" icon="+" />}
       <Modal
         open={open}
         onClose={handleClose}
@@ -69,8 +79,8 @@ function CreateModal({ mode, index }) {
         <Box sx={style}>
           <form onSubmit={handleCreateBoard}>
             <div className="create-modal-header">
-              <h4>Add a name for your board</h4>
-              <CloseIcon onClick={handleClose} sx={{ cursor: "pointer" }} />
+              <h4>{mode === "edit" ? "Edit" : "Add a"} name for your board</h4>
+              <CloseIcon onClick={() => {handleClose();setOpenModal && setOpenModal(false)}} sx={{ cursor: "pointer" }} />
             </div>
 
             <div className="create-modal-input-container">
@@ -95,7 +105,7 @@ function CreateModal({ mode, index }) {
             </div>
 
             <div className="create-modal-color-container">
-              {colors.map((color, index) => {
+              {colors.map((col, index) => {
                 return (
                   <div className="create-modal-color" key={index}>
                     <input
@@ -104,13 +114,13 @@ function CreateModal({ mode, index }) {
                       className="create-color"
                       onChange={(e) => setColor(e.target.value)}
                       value={index}
-                      id={index}
+                      id={index}  
                       hidden
-                      defaultChecked={index === 0 ? true : false}
+                      defaultChecked={index === color ? true : false}
                     />
                     <label
                       htmlFor={index}
-                      style={{ background: color }}
+                      style={{ background: col }}
                     ></label>
                   </div>
                 );
@@ -119,7 +129,7 @@ function CreateModal({ mode, index }) {
 
             <div className="create-modal-button-container">
               <button className="create-modal-button" type="submit">
-                Create board
+                {mode === "edit" ? "Edit" : "Create"} board
               </button>
             </div>
           </form>
