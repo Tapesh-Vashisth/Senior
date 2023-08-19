@@ -4,3 +4,39 @@
     justify-content: flex-end;
     align-items: "center";
 }
+
+.post_subcontainer {
+    background-color: white;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    /* gap: 5px; */
+    /* align-items: center; */
+    justify-content: space-between;
+    max-width: fit-content;
+}
+
+.post_header {
+    display: grid;
+    grid-template-columns: 6fr 1fr 1fr;
+    align-items: center;
+    justify-content: center;
+}
+
+.post_details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    /* justify-content: flex-start; */
+    align-items: flex-start;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0,0,0,.4);
+}
+
+.details_image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

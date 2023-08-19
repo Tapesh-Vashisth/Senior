@@ -19,10 +19,7 @@ export const BoardsList = ({boardList}) => {
           <div className="board_list">
             {boardList.map((board, index) => {
               return (
-                // <div 
-                //   key={board.id}
-                //   style = {{cursor: "pointer", alignSelf: "stretch"}}
-                // >
+
                   <Board
                     key = {board.id}
                     boardName={board.title}
@@ -32,7 +29,7 @@ export const BoardsList = ({boardList}) => {
                     setEditIndex = {setEditIndex}
                     setOpen = {setOpen}
                   />
-                // </div>
+
               );
             })}
           </div>
