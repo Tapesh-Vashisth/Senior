@@ -14,6 +14,7 @@ import { toast } from 'react-toastify';
 import convertToBase64 from '../helper/convertToBase64';
 
 
+
 const style = {
     position: 'absolute',
     top: '50%',
@@ -31,7 +32,7 @@ const style = {
     overflow: "scroll"
 };
 
-function CreatePostModal() {
+function CreatePostModal(boardIndex) {
     const [open, setOpen] = React.useState(false);
     const [title, setTitle] = React.useState("");
     const [image, setImage] = React.useState("");
@@ -48,8 +49,10 @@ function CreatePostModal() {
         e.preventDefault();
         console.log(title, description, image)
 
-        
+        dispatch(boardActions.addPost({boardIndex: boardIndex, title: title, description: description, image: image}));    
     }
+
+
 
     const handleImage = async (e) => {
         if (e.target.files) {

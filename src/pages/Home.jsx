@@ -13,7 +13,7 @@ function Home() {
       setBoardList(boards.boards);
     } else {
       setBoardList((prev) => {
-        return prev.filter((x) => x.title.includes(title));
+        return boards.boards.filter((x) => x.title.includes(title));
       })
     }
   }
