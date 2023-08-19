@@ -2,7 +2,7 @@ import React from "react";
 import { Post } from "./Post";
 import "../styles/postlists.css"
 
-function PostsList({ postList }) {
+function PostsList({ postList, boardIndex }) {
   console.log(postList);
   return (
     <div className="post_container">
@@ -18,6 +18,7 @@ function PostsList({ postList }) {
             image={post.image}
             index={index}
             date={post.created}
+            boardIndex={boardIndex}
           />
         );
       })}

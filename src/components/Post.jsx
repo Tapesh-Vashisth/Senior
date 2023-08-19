@@ -12,6 +12,7 @@ import { boardActions } from "../features/boardSlice";
 import { useNavigate } from "react-router-dom";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 const options = ["Edit", "Delete"];
 
 export const Post = ({
@@ -22,7 +23,8 @@ export const Post = ({
   likes,
   image,
   index,
-  date
+  date,
+  boardIndex
 }) => {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -36,7 +38,7 @@ export const Post = ({
   };
 
   const handleDelete = () => {
-    dispatch(boardActions.deleteBoard(index));
+    dispatch(boardActions.deletePost({boardIndex: boardIndex, postIndex: index}));
     handleClose();
   };
 
@@ -46,34 +48,53 @@ export const Post = ({
     // props.setOpen(true);
   };
 
-  const handleBoard = (id) => {
-    navigate("/board/" + id);
-  };
+  const handleLikes = () => {
+    dispatch(boardActions.likePost({boardIndex: boardIndex, postIndex: index}))
+  }
+
+  const handleBookmark = () => {
+    dispatch(boardActions.bookmark({boardIndex: boardIndex, postIndex: index}));
+  }
 
   return (
     <div className="post_subcontainer">
       <div className="post_header">
         <h3 style={{ marginRight: "100px"}}>{title}</h3>
         <div style={{  display: "flex", justifyContent: "flex-end"}}>
-        <BookmarkBorderIcon sx={{
-            height: "15px",
-            width: "20px",
-        }}/>
-
+          {
+            bookmark
+            ?
+            <BookmarkIcon sx={{
+                  height: "15px",
+                  width: "20px",
+                  color: "gold",
+                  cursor: "pointer"
+              }}
+              onClick = {handleBookmark}
+            />
+            :
+            <BookmarkBorderIcon sx={{
+                  height: "15px",
+                  width: "20px",
+                  cursor: "pointer"
+              }}
+              onClick = {handleBookmark}
+            />
+          }
         </div>
         <div className="post_colon_div">
           <IconButton
             aria-label="more"
-            id="long-button"
+            id="small-button"
             aria-controls={open ? "long-menu" : undefined}
             aria-expanded={open ? "true" : undefined}
             aria-haspopup="true"
             onClick={handleClick}
           >
             <MoreVertIcon sx={{
-            height: "15px",
-            width: "22px",
-        }}/>
+                height: "15px",
+                width: "18px",
+            }}/>
           </IconButton>
           <Menu
             id="long-menu"
@@ -116,19 +137,20 @@ export const Post = ({
         <div style={{
             fontSize: "12px",
             color: "grey",
-        }}>{date}</div>
+        }}>{date.toString()}</div>
         <div className="details_image">
-            <img src={image} alt="" />
+            <img src={image} alt="" style = {{objectFit: "cover", width: "100%"}} />
         </div>
         <div className="details_description">{description}</div>
       </div>
       <div className="likes" style={{
-        display: "flex",
-        justifyContent: "flex-start",
-        alignItems: "center",
-        marginTop: "5px"
-      }}>
-        <FavoriteBorderIcon />
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          marginTop: "5px"
+        }}
+      >
+        <FavoriteBorderIcon style = {{cursor: "pointer"}} onClick={handleLikes} />
         <p>{likes}</p>
       </div>
     </div>

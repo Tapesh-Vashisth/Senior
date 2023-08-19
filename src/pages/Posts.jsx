@@ -48,7 +48,7 @@ function Posts() {
         
           postList.length > 0
           ?
-          <PostsList postList={postList} />
+          <PostsList postList={postList} boardIndex = {boardIndex} />
           :
           <NotFound type="post" />
         }

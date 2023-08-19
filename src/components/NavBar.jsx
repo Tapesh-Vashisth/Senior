@@ -26,6 +26,7 @@ function NavBar({ type, onSearch, title }) {
   const searchIconHandler = () => {
     setSearchIcon(false);
   }
+  
   const handleSearchChange = (e) => {
     if (e.target.value === "") {
       // present all the items
