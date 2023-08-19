@@ -4,10 +4,9 @@ import { useSelector } from "react-redux";
 import colors from "../data/colors";
 import "../styles/boardList.css";
 import NotFound from "./NotFound";
+import { useNavigate } from "react-router-dom";
 
 export const BoardsList = ({boardList}) => {
-  console.log(boardList);
-
 
   return (
     <div className="boards_div">
@@ -18,7 +17,10 @@ export const BoardsList = ({boardList}) => {
           <ul className="board_list">
             {boardList.map((board, index) => {
               return (
-                <li key={board.id}>
+                <li 
+                  key={board.id}
+                  style = {{cursor: "pointer"}}
+                >
                   <Board
                     boardName={board.title}
                     boardColor={board.color}

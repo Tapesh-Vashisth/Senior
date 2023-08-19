@@ -9,10 +9,12 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { useDispatch } from "react-redux";
 import { boardActions } from "../features/boardSlice";
+import { useNavigate } from "react-router-dom";
 
 const options = ["Edit", "Delete"];
 
 function Board(props) {
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const dispatch = useDispatch();
@@ -33,13 +35,20 @@ function Board(props) {
     handleClose();
   }
 
+
+  const handleBoard = (id) => {
+    navigate("/board/" + id);
+  }
+
   return (
     <div className="board_box">
-      <div
-        className="color_div"
-        style={{ background: `${colors[Number(props.boardColor)]}` }}
-      ></div>
-      <div className="name_div">{props.boardName}</div>
+      <div className="board_left" onClick={() => handleBoard(props.boardId)}>
+        <div
+          className="color_div"
+          style={{ background: `${colors[Number(props.boardColor)]}` }}
+        ></div>
+        <div className="name_div">{props.boardName}</div>
+      </div>
       <div className="colon_div">
         <IconButton
           aria-label="more"
