@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Board from "./Board";
 import { useSelector } from "react-redux";
 import colors from "../data/colors";
 import "../styles/boardList.css";
 import NotFound from "./NotFound";
+import CreateModal from "./CreateModal";
 
 export const BoardsList = ({boardList}) => {
-  console.log(boardList);
-
+  const [open, setOpen] = useState(false);
+  const [editIndex, setEditIndex] = useState(0);
 
   return (
     <div className="boards_div">
@@ -24,6 +25,8 @@ export const BoardsList = ({boardList}) => {
                     boardColor={board.color}
                     boardId={board.id}
                     index = {index}
+                    setEditIndex = {setEditIndex}
+                    setOpen = {setOpen}
                   />
                 </li>
               );
@@ -32,6 +35,8 @@ export const BoardsList = ({boardList}) => {
           :
           <NotFound />
         }
+
+        <CreateModal openModal = {open} mode="edit" editIndex={editIndex} setOpenModal={setOpen} />
     </div>
   );
 };
