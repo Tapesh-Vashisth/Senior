@@ -15,7 +15,6 @@ import convertToBase64 from '../helper/convertToBase64';
 import CreateButton from './CreateButton';
 
 
-
 const style = {
     position: 'absolute',
     top: '50%',
@@ -33,7 +32,7 @@ const style = {
     overflow: "scroll"
 };
 
-function CreatePostModal(boardIndex) {
+function CreatePostModal({mode, boardIndex}) {
     const [open, setOpen] = React.useState(false);
     const [title, setTitle] = React.useState("");
     const [image, setImage] = React.useState("");
@@ -48,9 +47,20 @@ function CreatePostModal(boardIndex) {
 
     const handleCreatePost = (e) => {
         e.preventDefault();
-        console.log(title, description, image)
+        console.log(image);
+        if (image === "") {
+            console.log("hmm");
+            toast.error("Please Upload an Image", {
+                position: "top-right"
+            })
 
+            return ;
+        }
         dispatch(boardActions.addPost({boardIndex: boardIndex, title: title, description: description, image: image}));    
+        setOpen(false);
+        setTitle("");
+        setImage("");
+        setDescription("");
     }
 
 
@@ -95,7 +105,7 @@ function CreatePostModal(boardIndex) {
                             <input className='create-post-modal-input' type="text" name='title' placeholder='Enter Post Title' value={title} required onChange={(e) => setTitle(e.target.value)} />
                         </div>
 
-                        <div>
+                        <div className='image_uploader'>
                             {
                                 image !== ""
                                 ?
@@ -108,7 +118,7 @@ function CreatePostModal(boardIndex) {
                                     <p>Add your image</p>
                                 </label>
                             }
-                            <input type="file" name="image" id="image" hidden multiple={false} onChange={handleImage} />
+                            <input type="file" hidden name="image" id="image"  multiple={false} onChange={handleImage} />
                         </div>
 
                         <hr className='create-post-modal-separator' />

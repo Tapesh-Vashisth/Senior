@@ -24,7 +24,7 @@ function Home() {
   
   return (
     <div style = {{display: "flex", flexGrow: 1, flexDirection: "column", height: "100vh"}}>
-      <NavBar className="navbar" type = "board" onSearch = {onSearch} />
+      <NavBar className="navbar" type = "board" onSearch = {onSearch} title = "" />
       <BoardsList boardList={boardList} />
     </div>
   );

@@ -46,7 +46,7 @@ function CreateModal({ mode, editIndex, hanldleOpenOutside, openModal, setOpenMo
       setOpenModal(false);
     } else {
       dispatch(
-        boardActions.addBoard({ id: uuidv4(), title: title, color: color })
+        boardActions.addBoard({ id: uuidv4(), title: title, color: color, posts: [] })
       );
     }
     setTitle("");
@@ -56,7 +56,8 @@ function CreateModal({ mode, editIndex, hanldleOpenOutside, openModal, setOpenMo
 
   useEffect(() => {
     setOpen(!!openModal);
-    if (mode === "edit") {
+    if (mode === "edit" && boards.boards[editIndex]) {
+      
       setTitle(boards.boards[editIndex].title);
       setColor(Number(boards.boards[editIndex].color));
     }
@@ -126,11 +127,11 @@ function CreateModal({ mode, editIndex, hanldleOpenOutside, openModal, setOpenMo
               })}
             </div>
 
-            {/* <div className="create-modal-button-container">
+            <div className="create-modal-button-container">
               <button className="create-modal-button" type="submit">
                 {mode === "edit" ? "Edit" : "Create"} board
               </button>
-            </div> */}
+            </div>
             {/* <CreateButton  */}
           </form>
         </Box>

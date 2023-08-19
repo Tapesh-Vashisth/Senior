@@ -4,8 +4,10 @@ import { useEffect, useState } from "react";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import { useNavigate } from "react-router-dom";
 
-function NavBar({ type, onSearch }) {
+function NavBar({ type, onSearch, title }) {
+  const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [searchIcon, setSearchIcon] = useState(false);
 
@@ -33,6 +35,10 @@ function NavBar({ type, onSearch }) {
     setSearch(e.target.value);
   };
 
+  const handleNavigation = () => {
+    navigate(-1);
+  }
+
   return (
     <div className="navigation_bar">
       <div
@@ -42,7 +48,7 @@ function NavBar({ type, onSearch }) {
           alignItems: "center",
         }}
       >
-        {type === "posts" && <ArrowBackIosNewIcon />}
+        {type === "posts" && <ArrowBackIosNewIcon onClick = {handleNavigation} style = {{cursor: "pointer"}} />}
         {type === "posts" && (
           <img
             src={require("../assets/logo.png")}
@@ -57,7 +63,7 @@ function NavBar({ type, onSearch }) {
           <img src={require("../assets/logo.png")} alt="" />
         )}
         <h4 style={{ margin: "0px" }}>
-          {type === "posts" ? "Places around the world" : ""}
+          {title}
         </h4>
       </div>
 
@@ -67,15 +73,17 @@ function NavBar({ type, onSearch }) {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            cursor: "pointer"
           }}/>
         ) : (
           <div className="navigation_searchBar">
-            <label htmlFor="search">
+            <label htmlFor="search" style = {{cursor: "pointer"}}>
               <span className="material-icons-outlined">search</span>
             </label>
 
             <form onSubmit={handleSearch}>
               <input
+                id="search"
                 type="search"
                 name="search"
                 placeholder="Search"
@@ -87,12 +95,13 @@ function NavBar({ type, onSearch }) {
           </div>
         )}
 
-          {type === "posts" && <div>|</div>}
+        {type === "posts" && <div style = {{width: "1px", alignSelf: "stretch", backgroundColor: "black"}}></div>}
+
         <div className="modal_div">
           {type === "posts" ? (
             <BookmarkBorderIcon />
           ) : (
-            <CreateModal setSearch={setSearch} />
+            <CreateModal setSearch={setSearch} type = "create" />
           )}
         </div>
       </div>
