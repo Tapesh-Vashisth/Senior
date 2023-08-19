@@ -44,6 +44,7 @@ function CreateModal({ mode, editIndex, hanldleOpenOutside, openModal, setOpenMo
       dispatch(
         boardActions.editBoard({index: editIndex, title: title, color: color})
       );
+      setOpenModal(false);
     } else {
       dispatch(
         boardActions.addBoard({ id: uuidv4(), title: title, color: color })
@@ -52,7 +53,6 @@ function CreateModal({ mode, editIndex, hanldleOpenOutside, openModal, setOpenMo
     setTitle("");
     setOpen(0);
     handleClose();
-    setOpenModal(false);
   };
 
   useEffect(() => {
