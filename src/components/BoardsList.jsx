@@ -37,7 +37,7 @@ export const BoardsList = ({boardList}) => {
             })}
           </div>
           :
-          <NotFound />
+          <NotFound type = "board" />
         }
 
         <CreateModal openModal = {open} mode="edit" editIndex={editIndex} setOpenModal={setOpen} />
