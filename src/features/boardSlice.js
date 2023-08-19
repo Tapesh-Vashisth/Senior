@@ -35,6 +35,12 @@ const boardSlice = createSlice({
             }
             localStorage.setItem("Boards", JSON.stringify(state.boards));
         },
+        editPost: (state, action) => {
+            state.boards[action.payload.boardIndex].posts[action.payload.postIndex].title = action.payload.title;
+            state.boards[action.payload.boardIndex].posts[action.payload.postIndex].image = action.payload.image;
+            state.boards[action.payload.boardIndex].posts[action.payload.postIndex].description = action.payload.description;
+            localStorage.setItem("Boards", JSON.stringify(state.boards));
+        },
         likePost: (state, action) => {
             state.boards[action.payload.boardIndex].posts[action.payload.postIndex].likes += 1;
             localStorage.setItem("Boards", JSON.stringify(state.boards));

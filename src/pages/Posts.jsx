@@ -25,6 +25,15 @@ function Posts() {
     }
   }, []);
 
+  const onSearch = (title) => {
+    if (title === "") {
+      setPostList(boards.boards[boardIndex].posts);
+    } else {
+      setPostList((prev) => {
+        return boards.boards[boardIndex].posts.filter((x) => x.title.includes(title));
+      })
+    }
+  }
 
   useEffect(() => {
     setPostList(boards.boards[boardIndex].posts);
@@ -32,7 +41,7 @@ function Posts() {
 
   return (
     <div style = {{display: "flex", flexGrow: 1, flexDirection: "column", height: "100vh"}}>
-      <NavBar className="navbar" type="posts" title = {boards.boards[boardIndex].title} />
+      <NavBar className="navbar" type="posts" title = {boards.boards[boardIndex].title} onSearch={onSearch} />
       <div className='addPost_Modal' style = {{justifyContent: (postList.length === 0) ? "space-between": "flex-end", paddingLeft: "5px", paddingRight: "20px", background: colors[Number(boards.boards[boardIndex].color)]}}>
         {
           postList.length > 0

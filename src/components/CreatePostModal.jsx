@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -6,7 +6,7 @@ import Modal from '@mui/material/Modal';
 import CloseIcon from '@mui/icons-material/Close';
 import "../styles/CreatePostModal.css";
 import colors from '../data/colors';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { boardActions } from '../features/boardSlice';
 import {v4 as uuidv4} from 'uuid';
 import InsertPhotoOutlinedIcon from '@mui/icons-material/InsertPhotoOutlined';
@@ -32,22 +32,25 @@ const style = {
     overflow: "scroll"
 };
 
-function CreatePostModal({mode, boardIndex}) {
+function CreatePostModal({mode, boardIndex, postIndex, editOpen, setEditOpen}) {
     const [open, setOpen] = React.useState(false);
     const [title, setTitle] = React.useState("");
     const [image, setImage] = React.useState("");
     const [description, setDescription] = React.useState("");
     const dispatch = useDispatch();
     const handleOpen = () => setOpen(true);
+    const boards = useSelector((state) =>  state.boards);
+
     const handleClose = () => {
         setImage("");
-        setOpen(false)
+        setOpen(false);
+        setEditOpen && setEditOpen();
     };
 
 
     const handleCreatePost = (e) => {
         e.preventDefault();
-        console.log(image);
+
         if (image === "") {
             console.log("hmm");
             toast.error("Please Upload an Image", {
@@ -56,14 +59,28 @@ function CreatePostModal({mode, boardIndex}) {
 
             return ;
         }
-        dispatch(boardActions.addPost({boardIndex: boardIndex, title: title, description: description, image: image}));    
+
+        if (mode === "edit") {
+            dispatch(boardActions.editPost({boardIndex: boardIndex, postIndex: postIndex, title: title, description: description, image: image}));    
+            setEditOpen(false);
+        } else {
+            dispatch(boardActions.addPost({boardIndex: boardIndex, title: title, description: description, image: image}));    
+        }
+
         setOpen(false);
         setTitle("");
         setImage("");
         setDescription("");
     }
 
-
+    useEffect(() => {
+        setOpen(!!editOpen);
+        if (mode === "edit" && boards.boards[boardIndex].posts[postIndex]) {
+            setTitle(boards.boards[boardIndex].posts[postIndex].title)
+            setImage(boards.boards[boardIndex].posts[postIndex].image)
+            setDescription(boards.boards[boardIndex].posts[postIndex].description)
+        }
+    }, [editOpen])
 
     const handleImage = async (e) => {
         if (e.target.files) {
@@ -82,7 +99,13 @@ function CreatePostModal({mode, boardIndex}) {
     return (
         <>
             {/* <Button onClick={handleOpen}>+ Create New Post</Button> */}
-            <CreateButton modal={handleOpen} name="Create New Post" icon="+" />
+            {
+                mode === "edit"
+                ?
+                null
+                :
+                <CreateButton modal={handleOpen} name="Create New Post" icon="+" />
+            }
             <Modal
                 open={open}
                 onClose={handleClose}
@@ -97,7 +120,7 @@ function CreatePostModal({mode, boardIndex}) {
                                 <h4>Create a post</h4>
                                 <p>Write something for your post</p>
                             </div>
-                            <CloseIcon onClick = {handleClose} sx = {{cursor: "pointer"}} />
+                            <CloseIcon onClick = {() => {handleClose(); setEditOpen && setEditOpen(false)}} sx = {{cursor: "pointer"}} />
                         </div>
 
                         <div className='create-post-modal-input-container'>

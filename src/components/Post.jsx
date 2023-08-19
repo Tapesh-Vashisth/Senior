@@ -24,7 +24,9 @@ export const Post = ({
   image,
   index,
   date,
-  boardIndex
+  boardIndex,
+  setOpen,
+  setPostIndex 
 }) => {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -44,8 +46,8 @@ export const Post = ({
 
   const handleEdit = () => {
     handleClose();
-    // props.setEditIndex(props.index);
-    // props.setOpen(true);
+    setPostIndex(index);
+    setOpen(true);
   };
 
   const handleLikes = () => {

@@ -34,7 +34,7 @@ function CreateModal({ mode, editIndex, hanldleOpenOutside, openModal, setOpenMo
   const [color, setColor] = React.useState(0);
   const dispatch = useDispatch();
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {setOpen(false); setOpenModal && setOpenModal(false)};
   const boards = useSelector((state) => state.boards);
 
   const handleCreateBoard = (e) => {
@@ -57,13 +57,11 @@ function CreateModal({ mode, editIndex, hanldleOpenOutside, openModal, setOpenMo
   useEffect(() => {
     setOpen(!!openModal);
     if (mode === "edit" && boards.boards[editIndex]) {
-      
       setTitle(boards.boards[editIndex].title);
       setColor(Number(boards.boards[editIndex].color));
     }
   }, [openModal]);
 
-  
 
   return (
     <>
