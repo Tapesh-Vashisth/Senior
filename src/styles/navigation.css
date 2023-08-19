@@ -40,11 +40,9 @@
 
 @media (max-width: 650px) {
     .navigation_bar {
-        padding-left: 1px;
-        padding-right: 2px;
+        padding-left: 10px;
+        padding-right: 8px;
     }
 
-    .navigation_bar .create_button {
-        display: none;
-    }
+    
 }
